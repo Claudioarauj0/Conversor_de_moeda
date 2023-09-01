@@ -49,7 +49,7 @@ class HomeState extends State<Home> {
   late double dolar;
   late double euro;
 
-  void clearAll(){
+  void clearAll() {
     realController.text = "";
     dolarController.text = "";
     euroController.text = "";
@@ -60,33 +60,30 @@ class HomeState extends State<Home> {
       clearAll();
       return;
     }
-      double real = double.tryParse(text) ?? 0.0;
-      dolarController.text = (real / dolar).toStringAsFixed(2);
-      euroController.text = (real / dolar).toStringAsFixed(2);
-    }
-  
+    double real = double.parse(text);
+    dolarController.text = (real / dolar).toStringAsFixed(2);
+    euroController.text = (real / euro).toStringAsFixed(2);
+  }
 
   void dolarChanged(String text) {
-     if (text.isEmpty) {
+    if (text.isEmpty) {
       clearAll();
       return;
     }
-      double dolar = double.tryParse(text) ?? 0.0;
-      realController.text = (dolar * this.dolar).toStringAsFixed(2);
-      euroController.text = (dolar * this.dolar / euro).toStringAsFixed(2);
-    }
-  
+    double dolar = double.parse(text);
+    realController.text = (dolar * this.dolar).toStringAsFixed(2);
+    euroController.text = (dolar * this.dolar / euro).toStringAsFixed(2);
+  }
 
   void euroChanged(String text) {
-     if (text.isEmpty) {
+    if (text.isEmpty) {
       clearAll();
       return;
     }
-      double euro = double.tryParse(text) ?? 0.0;
-      realController.text = (euro * this.euro).toStringAsFixed(2);
-      euroController.text = (euro * this.euro / dolar).toStringAsFixed(2);
-    }
-  
+    double euro = double.parse(text);
+    realController.text = (euro * this.euro).toStringAsFixed(2);
+    dolarController.text = (euro * this.euro / dolar).toStringAsFixed(2);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -170,5 +167,3 @@ Widget campodevalor(String label, String prefix, TextEditingController c,
       onChanged: f,
       keyboardType: const TextInputType.numberWithOptions(),
     );
-
-    
